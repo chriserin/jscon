@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Jscon::VERSION
   spec.authors       = ["Christopher Erin"]
   spec.email         = ["chris.erin@gmail.com"]
-  spec.description   = %q{js console for rails}
-  spec.summary       = %q{js console for rails}
-  spec.homepage      = ""
+  spec.description   = %q{js repl for rails}
+  spec.summary       = %q{js repl for rails}
+  spec.homepage      = "https://github.com/chriserin/jscon"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
