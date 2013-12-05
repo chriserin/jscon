@@ -1,6 +1,32 @@
 # Jscon
 
-TODO: Write a gem description
+js repl for rails
+
+## Usage
+
+```bash
+    $ jscon
+    > a = 1
+    1
+    > b = function (){ return "B";}
+    [Function]
+    > $.fn.jquery
+    "1.9.1"
+    > Backbone.VERSION
+    "1.1.0"
+    > _.VERSION
+    "1.5.0"
+```
+
+```bash
+    $ jscon --coffee
+    > @a = 1
+    1
+    > @b = -> "B"
+    [Function]
+    > @b()
+    "B"
+```
 
 ## Installation
 
@@ -16,9 +42,6 @@ Or install it yourself as:
 
     $ gem install jscon
 
-## Usage
-
-TODO: Write usage instructions here
 
 ## Contributing
 
