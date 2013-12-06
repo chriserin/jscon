@@ -8,7 +8,7 @@ module Jscon
     def initialize(options)
       @options = options
       @asset_server = NoServer
-      #commands << Jscon::Commands::MultiLine
+      commands << Jscon::Commands::MultiLine
     end
 
     def repl_write(value); puts value; end

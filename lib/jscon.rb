@@ -3,6 +3,7 @@ require 'easy_repl'
 require 'thor'
 require 'coffee-script'
 
+require 'jscon/commands/multi_line'
 require 'jscon/dir'
 require 'jscon/pipes'
 require 'jscon/session'
