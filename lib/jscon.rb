@@ -1,6 +1,7 @@
 require "jscon/version"
 require 'easy_repl'
 require 'thor'
+require 'coffee-script'
 
 require 'jscon/dir'
 require 'jscon/pipes'

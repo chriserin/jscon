@@ -2,6 +2,14 @@ module Jscon
   class Session
     extend Forwardable
 
+    def self.rails_app_path
+      File.join(::Dir.pwd, '/config/environment')
+    end
+
+    def self.is_available?
+      File.exists? rails_app_path
+    end
+
     def initialize()
       load_rails_app
       configure_integration
@@ -9,7 +17,7 @@ module Jscon
     end
 
     def load_rails_app
-      require File.join(::Dir.pwd, '/config/environment')
+      require Jscon::Session.rails_app_path
     end
 
     def configure_integration
