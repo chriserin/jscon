@@ -11,10 +11,12 @@ module Jscon
       commands << Jscon::Commands::MultiLine
     end
 
-    def repl_write(value); puts value; end
+    def repl_write(value)
+      puts value
+    end
 
     def setup
-      @pipe_in, @pipe_out = Jscon::Pipes.create_set("js_repl")
+      @command_pipe, @result_pipe = Jscon::Pipes.create_set("js_repl")
       repl_write "loading"
       @asset_server = Jscon::AssetServer.start
       phantom_options = ""
@@ -27,12 +29,13 @@ module Jscon
     end
 
     def process_input(input)
-      File.open(@pipe_in, "w+") do |pipe|
+      File.open(@command_pipe, "w+") do |pipe|
         input = compile(input)
         pipe.write(input)
         pipe.flush
       end
-      repl_write IO.read(@pipe_out)
+      result = IO.read(@result_pipe)
+      repl_write result
     end
 
     def compile(input)
