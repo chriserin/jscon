@@ -10,7 +10,10 @@ module Jscon
         @session = Jscon::Session.new
         @child_pid = fork {
           loop do
+            puts @request
+            puts "before read"
             js_url = IO.read(@request)
+            puts "after read"
             js = get_javascript(js_url)
             IO.write(@response, js)
           end

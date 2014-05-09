@@ -9,6 +9,8 @@ module Jscon
       @options = options
       @asset_server = NoServer
       commands << Jscon::Commands::MultiLine
+      @server = Jscon::Server.new(9001)
+      @server.start
     end
 
     def repl_write(value)
@@ -16,7 +18,6 @@ module Jscon
     end
 
     def setup
-      @command_pipe, @result_pipe = Jscon::Pipes.create_set("js_repl")
       repl_write "loading"
       @asset_server = Jscon::AssetServer.start
       phantom_options = ""
@@ -29,12 +30,8 @@ module Jscon
     end
 
     def process_input(input)
-      File.open(@command_pipe, "w+") do |pipe|
-        input = compile(input)
-        pipe.write(input)
-        pipe.flush
-      end
-      result = IO.read(@result_pipe)
+      input = compile(input)
+      result = @server.send(input)
       repl_write result
     end
 
@@ -56,6 +53,7 @@ module Jscon
     end
 
     def teardown
+      @server.stop
       Process.kill(term=15, @phantom_pid)
     end
   end

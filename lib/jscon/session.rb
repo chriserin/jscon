@@ -10,14 +10,14 @@ module Jscon
       File.exists? rails_app_path
     end
 
-    def initialize()
+    def initialize
       load_rails_app
       configure_integration
       @session = ActionDispatch::Integration::Session.new(Rails.application)
     end
 
     def load_rails_app
-      require Jscon::Session.rails_app_path
+      require File.join(File.expand_path(::Dir.pwd), self.class.rails_app_path)
     end
 
     def configure_integration
@@ -32,6 +32,7 @@ module Jscon
     end
 
     def get(url)
+      puts url
       url = ::URI.encode(url) unless url.include? ?%
       @session.get(url)
     rescue Object => error
